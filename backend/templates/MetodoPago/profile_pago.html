@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="col">
+    <div class="h3 mb-3">
+        Método de pago
+    </div>
+</div>
+
+<div class="col-6">
+    <form method="post" id="payment-form">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Datos de la tarjeta</label>
+
+            <!-- Stripe injecta aquí el input -->
+            <div id="card-element" class="form-control"></div>
+
+            <!-- Errores -->
+            <div id="card-errors" class="text-danger mt-2" role="alert"></div>
+        </div>
+
+        <button
+            id="submit"
+            type="submit"
+            class="btn btn-primary"
+            data-secret="{{ client_secret }}">
+            Agregar tarjeta
+        </button>
+    </form>
+</div>
+
+<!-- Variables globales para JS -->
+<script>
+    const STRIPE_PUBLIC_KEY = 'pk_test_51SgsC5DjMgEySt7SJhkdqoYRpngdLE1DxvXXzrOMeDdI5j4BgZwaEGXEmJtInkVDA3CHg2bRlEmnEu5L2E2mF5Sw00YKE4rNsU';
+    const CSRF_TOKEN = "{{ csrf_token }}";
+</script>
+
+<!-- Stripe -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- Tu JS -->
+<script src="{% static 'js/index.js' %}"></script>
+
+{% endblock %}

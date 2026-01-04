@@ -1,0 +1,9 @@
+{% extends "base.html"%} {% block content %} {% load static %}
+<div class="col">
+  <div class="seccion">
+    <span class="seccion-1"> {{mensaje}} </span>
+  </div>
+  {% include 'products/snippets/search.html' %}
+  <div class="row">{% include 'products/snippets/listP.html' %}</div>
+</div>
+{% endblock %}
