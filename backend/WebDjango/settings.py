@@ -12,27 +12,103 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+from django.core.exceptions import ImproperlyConfigured
 from django.contrib.messages import constants as messages
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = BASE_DIR.parent
+
+load_dotenv(ROOT_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "insecure-dev-key")
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "True") == "True"
+DJANGO_ENV = os.getenv("DJANGO_ENV", "development").lower()
+IS_PRODUCTION = DJANGO_ENV == "production"
 
-ALLOWED_HOSTS = []
-SOCIAL_AUTH_FACEBOOK_KEY = os.getenv("FACEBOOK_CLIENT_ID")
-SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv("FACEBOOK_CLIENT_SECRET")
 
-STRIPE_PUBLIC_KEY = os.getenv("STRIPE_PUBLIC_KEY")
-STRIPE_PRIVATE_KEY = os.getenv("STRIPE_PRIVATE_KEY")
+def env_bool(name, default=False):
+    value = os.getenv(name)
+    if value is None:
+        return default
+    return value.lower() in ("1", "true", "yes", "on")
+
+
+def required_env(name):
+    value = os.getenv(name)
+    if not value:
+        raise ImproperlyConfigured(f"{name} is required.")
+    return value
+
+
+def require_pair(first_name, second_name):
+    first_value = os.getenv(first_name)
+    second_value = os.getenv(second_name)
+
+    if bool(first_value) != bool(second_value):
+        raise ImproperlyConfigured(
+            f"{first_name} and {second_name} must be configured together."
+        )
+
+    return first_value, second_value
+
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = required_env("DJANGO_SECRET_KEY")
+
+if IS_PRODUCTION and SECRET_KEY.startswith("django-insecure-"):
+    raise ImproperlyConfigured(
+        "DJANGO_SECRET_KEY must be a real secret when DJANGO_ENV=production."
+    )
+
+DEBUG = env_bool("DEBUG", default=not IS_PRODUCTION)
+
+if IS_PRODUCTION and DEBUG:
+    raise ImproperlyConfigured("DEBUG must be False when DJANGO_ENV=production.")
+
+allowed_hosts_default = "" if IS_PRODUCTION else "127.0.0.1,localhost"
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv("ALLOWED_HOSTS", allowed_hosts_default).split(",")
+    if host.strip()
+]
+
+if IS_PRODUCTION and (not ALLOWED_HOSTS or "*" in ALLOWED_HOSTS):
+    raise ImproperlyConfigured(
+        "ALLOWED_HOSTS must contain real domains when DJANGO_ENV=production."
+    )
+
+SESSION_COOKIE_SECURE = IS_PRODUCTION
+CSRF_COOKIE_SECURE = IS_PRODUCTION
+SECURE_SSL_REDIRECT = IS_PRODUCTION
+SECURE_HSTS_SECONDS = 31536000 if IS_PRODUCTION else 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = IS_PRODUCTION
+SECURE_HSTS_PRELOAD = IS_PRODUCTION
+
+SOCIAL_AUTH_FACEBOOK_KEY, SOCIAL_AUTH_FACEBOOK_SECRET = require_pair(
+    "FACEBOOK_CLIENT_ID",
+    "FACEBOOK_CLIENT_SECRET",
+)
+
+if IS_PRODUCTION and (not SOCIAL_AUTH_FACEBOOK_KEY or not SOCIAL_AUTH_FACEBOOK_SECRET):
+    raise ImproperlyConfigured(
+        "Facebook keys are required when DJANGO_ENV=production."
+    )
+
+STRIPE_PUBLIC_KEY = required_env("STRIPE_PUBLIC_KEY")
+STRIPE_PRIVATE_KEY = required_env("STRIPE_PRIVATE_KEY")
+
+if IS_PRODUCTION and (
+    STRIPE_PUBLIC_KEY.startswith("pk_test_")
+    or STRIPE_PRIVATE_KEY.startswith("sk_test_")
+):
+    raise ImproperlyConfigured(
+        "Stripe live keys are required when DJANGO_ENV=production."
+    )
 
 # Application definition
 
