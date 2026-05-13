@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block breadcrumb %}
 {% include 'orden/snippets/breadcrumb.html' %}
@@ -34,8 +35,9 @@
                     <div class="badge bg-danger text-wrap">
                         Metodos de pago
                     </div>
-                    <div class="fst-italic">
-                        Tarjeta de pago: 123
+                    <div class="mt-2">
+                        <div id="card-element" class="form-control"></div>
+                        <div id="card-errors" class="text-danger mt-2" role="alert"></div>
                     </div>
                 </div>
                 <div class="col-4">
@@ -70,8 +72,18 @@
 </div>
 
 <div class="col">
-    {% url 'completado' as next_url %}
-    {% include 'orden/snippets/detalles.html' with next_url=next_url %}
+    {% include 'orden/snippets/detalles.html' %}
+    <div class="card card border-warning mb-3" style="width: 18rem;">
+        <div class="card-body">
+            <button
+                id="pay-button"
+                type="button"
+                class="btn btn-warning d-grid gap-2 w-100">
+                Pagar con Stripe
+            </button>
+            <div id="payment-status" class="small mt-2"></div>
+        </div>
+    </div>
     <div class="">
         <div class="card card border-warning mb-3" style="width: 18rem;">
             <div class="card-body">
@@ -85,7 +97,78 @@
 
 {% block js %}
 
+<script src="https://js.stripe.com/v3/"></script>
 <script>
+    const stripe = Stripe("{{ stripe_public_key }}");
+    const elements = stripe.elements();
+    const card = elements.create("card");
+    const payButton = document.getElementById("pay-button");
+    const paymentStatus = document.getElementById("payment-status");
+    const cardErrors = document.getElementById("card-errors");
+
+    card.mount("#card-element");
+
+    card.on("change", function(event) {
+        if (event.error) {
+            cardErrors.textContent = event.error.message;
+        } else {
+            cardErrors.textContent = "";
+        }
+    });
+
+    payButton.addEventListener("click", async function() {
+        payButton.disabled = true;
+        paymentStatus.className = "small mt-2 text-muted";
+        paymentStatus.textContent = "Procesando pago...";
+
+        try {
+            const intentResponse = await fetch("{% url 'crear_payment_intent' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+            });
+            const intentData = await intentResponse.json();
+
+            if (!intentResponse.ok) {
+                throw new Error(intentData.error || "No se pudo iniciar el pago");
+            }
+
+            const result = await stripe.confirmCardPayment(intentData.client_secret, {
+                payment_method: {
+                    card: card,
+                },
+            });
+
+            if (result.error) {
+                throw new Error(result.error.message);
+            }
+
+            const confirmResponse = await fetch("{% url 'confirmar_pago' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+                body: JSON.stringify({
+                    payment_intent_id: result.paymentIntent.id,
+                }),
+            });
+            const confirmData = await confirmResponse.json();
+
+            if (!confirmResponse.ok) {
+                throw new Error(confirmData.error || "Stripe no confirmó el pago");
+            }
+
+            window.location.href = confirmData.redirect_url;
+        } catch (error) {
+            paymentStatus.className = "small mt-2 text-danger";
+            paymentStatus.textContent = error.message;
+            payButton.disabled = false;
+        }
+    });
+
     const form = document.getElementById('formPromo-codigo')
 
     form.addEventListener('submit', function(e){

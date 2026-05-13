@@ -9,5 +9,8 @@ urlpatterns = [
     path('confirmacion',views.confirmacion, name='confirmacion'),
     path('cancelar',views.cancelar_orden, name='cancelar'),
     path('completado',views.completado, name='completado'),
+    path('crear-payment-intent',views.crear_payment_intent, name='crear_payment_intent'),
+    path('confirmar-pago',views.confirmar_pago, name='confirmar_pago'),
+    path('stripe/webhook',views.stripe_webhook, name='stripe_webhook'),
     path('completados',views.OrdenViews.as_view(), name='completados'),
 ]
