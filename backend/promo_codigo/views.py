@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 from .models import PromoCodigo
 from orden.decorador import validar_cart_and_orden
 
 
+@require_POST
 @validar_cart_and_orden
 def validar(request, cart, orden):
-    codigo = request.GET.get('code')
+    codigo = request.POST.get('codigo')
     promo_codigo = PromoCodigo.objects.get_validar(codigo)
     
     if promo_codigo is None:

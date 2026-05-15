@@ -6,8 +6,8 @@ from orden.comun import OrdenStatus
 class User(AbstractUser):
     
     def get_full_name(self) -> str:
-        def get_full_name(self):
-            return '{}, {}'.format(self.first_name, self.last_name)
+        full_name = f"{self.first_name} {self.last_name}".strip()
+        return full_name or self.get_username()
         
     @property
     def direccion_envio(self):

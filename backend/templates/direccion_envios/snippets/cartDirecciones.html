@@ -10,7 +10,10 @@
         {% if direccion_envio.default %}
         <span class="badge bg-success">Dirección Principal</span>
         {% else %}
-        <a href="{% url 'default' direccion_envio.pk %}" class="btn btn-warning">Default</a>       
+        <form action="{% url 'default' direccion_envio.pk %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-warning">Default</button>
+        </form>
       </div>
       <div>
         <a href="{% url 'delete' direccion_envio.pk %}" class="btn btn-danger">Eliminar</a>

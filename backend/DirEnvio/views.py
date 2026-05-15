@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.views.decorators.http import require_POST
 from carts.funciones import funcionCarrito
 from orden.utils import funcionOrden
 from django.http.response import HttpResponseRedirect
@@ -61,6 +62,9 @@ class UpdateDireccion(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'direccion_envios/actualizar.html'
     success_message = 'Dirección actualizada con éxito'
     
+    def get_queryset(self):
+        return DireccionEnvio.objects.filter(user=self.request.user)
+    
     def get_success_url(self):
         return reverse('direccion_envio')
     
@@ -70,6 +74,9 @@ class DeleteDireccion(LoginRequiredMixin, DeleteView):
     template_name = 'direccion_envios/delete.html'
     success_url = reverse_lazy('direccion_envio')
     
+    def get_queryset(self):
+        return DireccionEnvio.objects.filter(user=self.request.user)
+    
     def dispatch(self, request, *args, **kwargs):
         if self.get_object().default:
             return redirect('direccion_envio')
@@ -78,17 +85,12 @@ class DeleteDireccion(LoginRequiredMixin, DeleteView):
             messages.error(request, 'No puedes eliminar una direccion asociada a una orden')
             return redirect('direccion_envio')
         
-        if request.user.id != self.get_object().user_id:
-            return redirect('index')
-        
         return super(DeleteDireccion, self).dispatch(request, *args, **kwargs)
     
 @login_required(login_url='login')
+@require_POST
 def funcDefault(request,pk):
-    direccion_envio = get_object_or_404(DireccionEnvio, pk=pk)
-    
-    if request.user.id != direccion_envio.user_id:
-        return redirect('index')
+    direccion_envio = get_object_or_404(DireccionEnvio, pk=pk, user=request.user)
     
     if request.user.has_direccion_envio():
         request.user.direccion_envio.update_default()

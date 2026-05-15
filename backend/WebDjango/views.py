@@ -9,6 +9,7 @@ from .forms import Registro
 from users.models import User
 from django.contrib.auth.backends import ModelBackend 
 from products.models import Product
+from django.views.decorators.http import require_POST
 
 
 def index(request):
@@ -40,6 +41,7 @@ def login(request):
                 
     return render(request, 'users/login.html',{})
 
+@require_POST
 def salir(request):
     logout(request)
     messages.success(request,"Sesion cerrada")

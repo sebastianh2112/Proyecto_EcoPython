@@ -155,10 +155,7 @@ def select_direccion(request):
 @login_required(login_url="login")
 @validar_cart_and_orden
 def check_direccion(request, cart, orden, pk):
-    direccion_envio = get_object_or_404(DireccionEnvio, pk=pk)
-
-    if request.user.id != direccion_envio.user_id:
-        return redirect("index")
+    direccion_envio = get_object_or_404(DireccionEnvio, pk=pk, user=request.user)
 
     orden.update_direccion_envio(direccion_envio)
 
@@ -186,6 +183,7 @@ def confirmacion(request, cart, orden):
 
 
 @login_required(login_url="login")
+@require_POST
 @validar_cart_and_orden
 def cancelar_orden(request, cart, orden):
     if request.user.id != orden.user_id:
@@ -201,6 +199,7 @@ def cancelar_orden(request, cart, orden):
 
 
 @login_required(login_url="login")
+@require_POST
 @validar_cart_and_orden
 def completado(request, cart, orden):
     messages.error(

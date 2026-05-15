@@ -66,9 +66,12 @@
 
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'salir' %}">
-            <i class="fas fa-sign-out-alt"></i> Log Out
-          </a>
+          <form action="{% url 'salir' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="nav-link border-0 bg-transparent">
+              <i class="fas fa-sign-out-alt"></i> Log Out
+            </button>
+          </form>
         </li>
         {% endif %}
       </ul>
