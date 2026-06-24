@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-12 col-sm-10 col-md-6 col-lg-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-dark text-white text-center py-3">
+      <h4 class="mb-0">Iniciar sesion</h4>
+    </div>
+    <div class="card-body px-4 py-4">
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="username" class="form-label fw-semibold">Usuario</label>
+          <input
+            type="text"
+            name="username"
+            class="form-control"
+            id="username"
+            placeholder="Tu nombre de usuario"
+            autofocus
+          />
+        </div>
+        <div class="mb-4">
+          <label for="password" class="form-label fw-semibold">Contrasena</label>
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            id="password"
+            placeholder="Tu contrasena"
+          />
+        </div>
+
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn btn-dark btn-lg">Iniciar sesion</button>
+        </div>
+      </form>
+
+      <div class="d-grid mb-3">
+        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-outline-primary">
+          <i class="fab fa-facebook-f me-2"></i> Continuar con Facebook
+        </a>
+      </div>
+
+      <hr />
+      <p class="text-center text-muted mb-0 small">
+        No tienes cuenta?
+        <a href="{% url 'registro' %}" class="text-decoration-none fw-semibold">Registrate</a>
+      </p>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

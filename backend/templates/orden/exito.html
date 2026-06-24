@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load funcion_tag %}
+
+{% block content %}
+
+<div class="col-8">
+    <div class="alert alert-success d-flex align-items-center mb-4" role="alert">
+        <i class="fa-solid fa-circle-check me-2 fs-4"></i>
+        <div>
+            <strong>Compra completada</strong> — Orden #{{ orden.ordenID }}
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <span class="badge bg-primary">Direccion de envio</span>
+        </div>
+        <div class="card-body">
+            <div class="fst-italic">{{ orden.direccion_envio.direccion }}</div>
+            <div class="fst-italic">{{ orden.direccion_envio.line1 }}</div>
+            {% if orden.direccion_envio.reference %}
+            <div class="fst-italic text-muted">Referencia: {{ orden.direccion_envio.reference }}</div>
+            {% endif %}
+            <div class="fst-italic">CP: {{ orden.direccion_envio.postal_code }}</div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <span class="badge bg-secondary">Productos</span>
+        </div>
+        <div class="card-body">
+            {% for item in orden.items.all %}
+            <div class="row align-items-center mb-2">
+                <div class="col-2">
+                    {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" width="60" height="60" class="rounded">
+                    {% endif %}
+                </div>
+                <div class="col-6">
+                    <div>{{ item.title }}</div>
+                    <div class="text-muted small">Cantidad: {{ item.quantity }}</div>
+                </div>
+                <div class="col-4 text-end">
+                    <strong>{{ item.price | precio_tag }}</strong>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    <div class="card border-success mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Resumen del pago</h5>
+            <table class="table table-borderless table-sm">
+                <tbody>
+                    <tr class="table-info">
+                        <td>Envio:</td>
+                        <td>${{ orden.envio_total }}</td>
+                    </tr>
+                    {% if orden.promo_codigo %}
+                    <tr class="table-success">
+                        <td>Descuento:</td>
+                        <td>-${{ orden.promo_codigo.descuento }}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <hr>
+            <div class="fw-bolder text-success">
+                Total pagado: {{ orden.total | precio_tag }}
+            </div>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2">
+        <a href="{% url 'completados' %}" class="btn btn-warning">Ver mis pedidos</a>
+        <a href="{% url 'index' %}" class="btn btn-outline-secondary">Seguir comprando</a>
+    </div>
+</div>
+
+{% endblock %}

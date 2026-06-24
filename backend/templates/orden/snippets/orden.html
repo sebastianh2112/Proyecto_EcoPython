@@ -1,0 +1,57 @@
+{% load funcion_tag %}
+<div class="card mb-2">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-4">
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <i class="fa-solid fa-circle-check me-2"></i>
+                    <div>
+                        Orden completada
+                    </div>
+                    <div>
+                        {{orden.created_at}}
+                    </div>
+                </div>
+            </div>
+ 
+            <div class="col-4">
+                <div class="badge bg-primary">
+                    Total
+                </div>
+                <div>
+                    {{orden.total | precio_tag}}
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="badge bg-danger">
+                    Direccion de envio
+                </div>
+                <div>
+                    {{orden.direccion_envio}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+    {% for item in orden.items.all %}
+    <div class="row">
+        <div class="col-4">
+            {% if item.product.image %}
+            <img src="{{ item.product.image.url }}" width="70" height="70">
+            {% endif %}
+        </div>
+        <div class="col-4">
+            <div>{{ item.title }}</div>
+            <div class="text-danger">
+                {{ item.price|precio_tag }}
+            </div>
+        </div>
+        <div class="col-4">
+            <div>Cantidad</div>
+            <div>{{ item.quantity }}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>

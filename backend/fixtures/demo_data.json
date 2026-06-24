@@ -1,0 +1,472 @@
+[
+  {
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+      "title": "Laptop Ultradelgada 15\"",
+      "description": "Procesador Intel Core i7 de 12a generacion, 16GB RAM, SSD 512GB. Ideal para trabajo remoto y productividad.",
+      "price": "899.99",
+      "image": "products/demo-laptop.jpg",
+      "slug": "laptop-ultradelgada-15",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+      "title": "Teclado Mecanico RGB TKL",
+      "description": "Switches tactiles Blue, iluminacion RGB por tecla, layout tenkeyless compacto. Compatible con Windows y Mac.",
+      "price": "79.99",
+      "image": "products/demo-teclado.jpg",
+      "slug": "teclado-mecanico-rgb-tkl",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+      "title": "Monitor 27\" 4K UHD",
+      "description": "Panel IPS 4K con 99% sRGB, 60Hz, tiempo de respuesta 5ms. Conexion HDMI y DisplayPort incluidas.",
+      "price": "349.99",
+      "image": "products/demo-monitor.jpg",
+      "slug": "monitor-27-4k-uhd",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+      "title": "Mouse Ergonomico Inalambrico",
+      "description": "Diseno vertical que reduce la tension en la muneca, receptor USB nano, 6 botones programables. Bateria de hasta 90 dias.",
+      "price": "44.99",
+      "image": "products/demo-mouse.jpg",
+      "slug": "mouse-ergonomico-inalambrico",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+      "title": "Auriculares Noise Cancelling Pro",
+      "description": "Cancelacion activa de ruido, 30 horas de bateria, diadema acolchada. Sonido envolvente Hi-Res Audio.",
+      "price": "159.99",
+      "image": "products/demo-auriculares.jpg",
+      "slug": "auriculares-noise-cancelling-pro",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+      "title": "Camara Web 1080p Full HD",
+      "description": "Resolucion 1080p a 30fps, microfono con reduccion de ruido, compatible con Zoom, Meet y Teams. Clip universal.",
+      "price": "59.99",
+      "image": "products/demo-camara.jpg",
+      "slug": "camara-web-1080p-full-hd",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+      "title": "Hub USB-C 7 en 1",
+      "description": "HDMI 4K, 3x USB-A 3.0, lector SD y microSD, USB-C Power Delivery 100W. Compatible con laptops y tablets.",
+      "price": "34.99",
+      "image": "products/demo-hub-usb.jpg",
+      "slug": "hub-usb-c-7-en-1",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+      "title": "Camiseta de Algodon Premium",
+      "description": "100% algodon organico de alta densidad, corte regular, cuello redondo reforzado. Disponible en 8 colores.",
+      "price": "24.99",
+      "image": "products/demo-camiseta.jpg",
+      "slug": "camiseta-de-algodon-premium",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+      "title": "Jeans Slim Fit Hombre",
+      "description": "Denim elastico 98% algodon 2% elastano, corte slim moderno. Disponible en talles 28 al 38.",
+      "price": "49.99",
+      "image": "products/demo-jeans.jpg",
+      "slug": "jeans-slim-fit-hombre",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+      "title": "Chaqueta Cortavientos Ligera",
+      "description": "Tela ripstop 100% poliester, capucha desmontable, bolsillos con cierre. Resistente al agua y al viento.",
+      "price": "69.99",
+      "image": "products/demo-chaqueta.jpg",
+      "slug": "chaqueta-cortavientos-ligera",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+      "title": "Polo Sport Secado Rapido",
+      "description": "Tejido DryFit de microfibra, bloqueador UV 50+, costuras planas antirroce. Ideal para actividades al aire libre.",
+      "price": "29.99",
+      "image": "products/demo-polo.jpg",
+      "slug": "polo-sport-secado-rapido",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+      "title": "Bermuda Casual Cargo",
+      "description": "Tela chino elastica, 4 bolsillos funcionales, cierre con boton y cremallera. Corte relajado por encima de la rodilla.",
+      "price": "34.99",
+      "image": "products/demo-bermuda.jpg",
+      "slug": "bermuda-casual-cargo",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+      "title": "Sudadera con Capucha Unisex",
+      "description": "Felpa de 320g/m2, bolsillo canguro, cordon ajustable. Lavado a maquina hasta 40°C sin deformarse.",
+      "price": "44.99",
+      "image": "products/demo-sudadera.jpg",
+      "slug": "sudadera-con-capucha-unisex",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+      "title": "Pack x5 Calcetines Deportivos",
+      "description": "Algodon con refuerzo en talon y puntera, zona de ventilacion en el empeine. Talla unica 38-45.",
+      "price": "14.99",
+      "image": "products/demo-calcetines.jpg",
+      "slug": "pack-x5-calcetines-deportivos",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 15,
+    "fields": {
+      "title": "Bolso de Cuero Vegano Crossbody",
+      "description": "Cuero sintetico de alta calidad, 3 compartimentos internos, correa ajustable de 120cm. Cierre magnetico.",
+      "price": "54.99",
+      "image": "products/demo-bolso.jpg",
+      "slug": "bolso-de-cuero-vegano-crossbody",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 16,
+    "fields": {
+      "title": "Gafas de Sol Polarizadas UV400",
+      "description": "Marco de acetato ligero, lentes polarizadas con proteccion UV400. Incluye estuche rigido y pano de limpieza.",
+      "price": "39.99",
+      "image": "products/demo-gafas.jpg",
+      "slug": "gafas-de-sol-polarizadas-uv400",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 17,
+    "fields": {
+      "title": "Billetera Minimalista RFID",
+      "description": "Aluminio anodizado con bloqueo RFID, capacidad para 6 tarjetas y billetes. Diseño ultradelgado de 6mm.",
+      "price": "29.99",
+      "image": "products/demo-billetera.jpg",
+      "slug": "billetera-minimalista-rfid",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 18,
+    "fields": {
+      "title": "Pulsera de Silicona Sport",
+      "description": "Silicona hipoalergenica de grado medico, cierre de acero inoxidable, resistente al agua 50m. Disponible en 6 colores.",
+      "price": "12.99",
+      "image": "products/demo-pulsera.jpg",
+      "slug": "pulsera-de-silicona-sport",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 19,
+    "fields": {
+      "title": "Mochila Antirrobo 25L",
+      "description": "Cierres ocultos en la parte trasera, compartimento acolchado para laptop 15.6\", puerto USB externo. Material impermeable.",
+      "price": "64.99",
+      "image": "products/demo-mochila.jpg",
+      "slug": "mochila-antirrobo-25l",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 20,
+    "fields": {
+      "title": "Reloj Analogico Minimalista",
+      "description": "Mecanismo de cuarzo japones, correa de cuero genuino intercambiable, cristal mineral antiaranazo. Resistente al agua 3ATM.",
+      "price": "89.99",
+      "image": "products/demo-reloj.jpg",
+      "slug": "reloj-analogico-minimalista",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 21,
+    "fields": {
+      "title": "Bufanda de Lana Merino",
+      "description": "100% lana merino extra-fina 18 micras, tejido tipo espiga, dimensiones 180x30cm. Suave y no produce picor.",
+      "price": "34.99",
+      "image": "products/demo-bufanda.jpg",
+      "slug": "bufanda-de-lana-merino",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 22,
+    "fields": {
+      "title": "Cafetera de Goteo Programable",
+      "description": "12 tazas, temporizador de 24h, placa calentadora, filtro reutilizable incluido. Jarra de vidrio resistente al calor.",
+      "price": "59.99",
+      "image": "products/demo-cafetera.jpg",
+      "slug": "cafetera-de-goteo-programable",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 23,
+    "fields": {
+      "title": "Set de Cuchillos de Cocina x6",
+      "description": "Acero inoxidable alemán 1.4116, mango ergonomico antideslizante, incluye soporte de madera de bambu. Iman de seguridad.",
+      "price": "89.99",
+      "image": "products/demo-cuchillos.jpg",
+      "slug": "set-de-cuchillos-de-cocina-x6",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 24,
+    "fields": {
+      "title": "Lampara de Mesa LED Regulable",
+      "description": "3 temperaturas de color (calido/neutro/frio), 10 niveles de brillo, carga inalambrica Qi 10W en la base. USB-A extra.",
+      "price": "49.99",
+      "image": "products/demo-lampara.jpg",
+      "slug": "lampara-de-mesa-led-regulable",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 25,
+    "fields": {
+      "title": "Almohada Viscoelastica Cervical",
+      "description": "Espuma de memoria con efecto frio, altura ajustable con laminillas extraibles. Funda de bambu lavable a maquina.",
+      "price": "44.99",
+      "image": "products/demo-almohada.jpg",
+      "slug": "almohada-viscoelastica-cervical",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 26,
+    "fields": {
+      "title": "Organizador de Escritorio Bambu",
+      "description": "7 compartimentos modulares, soporte para monitor integrado, bandeja para teclado extraible. Bambu sostenible certificado.",
+      "price": "39.99",
+      "image": "products/demo-organizador.jpg",
+      "slug": "organizador-de-escritorio-bambu",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 27,
+    "fields": {
+      "title": "Hervidor Electrico de Vidrio 1.7L",
+      "description": "Vidrio borosilicato 1.7L, filtro antical extraible, indicador de temperatura LED, apagado automatico. Base 360°.",
+      "price": "34.99",
+      "image": "products/demo-hervidor.jpg",
+      "slug": "hervidor-electrico-de-vidrio-17l",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 28,
+    "fields": {
+      "title": "Juego de Sabanas 100% Algodon",
+      "description": "Algodon percal 300 hilos, incluye 2 fundas de almohada y sabana bajera con elastico 40cm. Cama 160x200cm.",
+      "price": "54.99",
+      "image": "products/demo-sabanas.jpg",
+      "slug": "juego-de-sabanas-100-algodon",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 29,
+    "fields": {
+      "title": "Zapatillas de Running Ligeras",
+      "description": "Suela de espuma reactiva EVA, upper de mesh transpirable, drop 8mm. Peso 240g. Horma neutra para distancia.",
+      "price": "109.99",
+      "image": "products/demo-zapatillas.jpg",
+      "slug": "zapatillas-de-running-ligeras",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 30,
+    "fields": {
+      "title": "Mancuernas Ajustables 2-10 kg",
+      "description": "Sistema de ajuste rapido por selector, recubrimiento de neopreno, incluye soporte de almacenamiento. Par completo.",
+      "price": "79.99",
+      "image": "products/demo-mancuernas.jpg",
+      "slug": "mancuernas-ajustables-2-10-kg",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 31,
+    "fields": {
+      "title": "Esterilla de Yoga Antideslizante",
+      "description": "TPE ecologico 6mm de grosor, textura grip doble cara, dimensiones 183x61cm. Incluye correa de transporte.",
+      "price": "29.99",
+      "image": "products/demo-esterilla.jpg",
+      "slug": "esterilla-de-yoga-antideslizante",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 32,
+    "fields": {
+      "title": "Botella Termica de Acero 750ml",
+      "description": "Acero inoxidable 18/8 doble pared, mantiene frio 24h y caliente 12h. Boca ancha 5cm, libre de BPA.",
+      "price": "24.99",
+      "image": "products/demo-botella.jpg",
+      "slug": "botella-termica-de-acero-750ml",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 33,
+    "fields": {
+      "title": "Cuerda de Saltar con Contador",
+      "description": "Cable de acero recubierto PVC, mangos ergonomicos con rodamiento de precision, display LCD para contador y calorias.",
+      "price": "19.99",
+      "image": "products/demo-cuerda.jpg",
+      "slug": "cuerda-de-saltar-con-contador",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 34,
+    "fields": {
+      "title": "Guantes de Entrenamiento",
+      "description": "Cuero sintetico reforzado, muñequera de neopreno con velcro, palma acolchada antideslizante. Tallas S a XXL.",
+      "price": "22.99",
+      "image": "products/demo-guantes.jpg",
+      "slug": "guantes-de-entrenamiento",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 35,
+    "fields": {
+      "title": "Bandas de Resistencia Pack x4",
+      "description": "Latex natural en 4 niveles de resistencia (5/10/15/20 kg), ancho 2cm, longitud 208cm. Incluye bolsa de transporte.",
+      "price": "27.99",
+      "image": "products/demo-bandas.jpg",
+      "slug": "bandas-de-resistencia-pack-x4",
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": 1,
+    "fields": {
+      "title": "Tecnologia",
+      "description": "Laptops, perifericos, monitores, camaras y accesorios digitales para trabajo y entretenimiento.",
+      "products": [1, 2, 3, 4, 5, 6, 7],
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": 2,
+    "fields": {
+      "title": "Ropa",
+      "description": "Prendas casuales y deportivas de calidad para hombre y mujer. Materiales naturales y tejidos tecnicos.",
+      "products": [8, 9, 10, 11, 12, 13, 14],
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": 3,
+    "fields": {
+      "title": "Accesorios",
+      "description": "Bolsos, gafas, relojes, mochilas y complementos para completar tu estilo del dia a dia.",
+      "products": [15, 16, 17, 18, 19, 20, 21],
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": 4,
+    "fields": {
+      "title": "Hogar",
+      "description": "Electrodomesticos, utensilios de cocina, iluminacion y textiles para tu hogar.",
+      "products": [22, 23, 24, 25, 26, 27, 28],
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": 5,
+    "fields": {
+      "title": "Deportes",
+      "description": "Zapatillas, equipamiento de fitness, accesorios de yoga y material para entrenamiento en casa o al aire libre.",
+      "products": [29, 30, 31, 32, 33, 34, 35],
+      "created_at": "2026-01-10T10:00:00Z"
+    }
+  }
+]

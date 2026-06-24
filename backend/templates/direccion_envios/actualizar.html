@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h3 class="text-center mb-4">Actualizar Dirección</h3>
+        {% include 'direccion_envios/snippets/form.html' with messages='Actualizar' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

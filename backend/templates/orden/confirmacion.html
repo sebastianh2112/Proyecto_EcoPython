@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block breadcrumb %}
+{% include 'orden/snippets/breadcrumb.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="col-8">
+    <div class="h3">
+        Confirmacion de pedido
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <div class="badge bg-primary text-wrap">
+                        Direccion de envio
+                    </div>
+                    <div class="fst-italic">
+                        Direccion: {{direccion_envio.direccion}}
+                    </div>
+                    <div class="fst-italic">
+                        Domicilio: {{direccion_envio.line1}}
+                    </div>
+                    <div class="fst-italic">
+                        Referencia: {{direccion_envio.reference}}
+                    </div>
+                    <div class="fst-italic">
+                        Codigo Postal: {{direccion_envio.postal_code}}
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="badge bg-danger text-wrap">
+                        Metodos de pago
+                    </div>
+                    <div class="mt-2">
+                        <div id="card-element" class="form-control"></div>
+                        <div id="card-errors" class="text-danger mt-2" role="alert"></div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="badge bg-warning text-wrap">
+                        Codigo de descuento
+                    </div>
+                    <form id="formPromo-codigo" action="{% url 'validar' %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="codigo" value="{{orden.promo_codigo.codigo}}" class="form-control" placeholder="Codigo Descuento" {% if orden.promo_codigo %} readonly {% endif %}>
+                    </form>
+                    <div class="text-success" id="codigosuccess" style="font-size: 15;">
+                        {% if orden.promo_codigo %}
+                        Codigo aplicado
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-primary" role="alert">
+        Esta es tú orden hasta el momento <a href="{% url 'orden' %}" class="alert-link">Mi orden</a>
+        puedes modificarla si quieres
+    </div>
+    <div class="mt-1">
+        <div class="card">
+            <div class="card-body">
+                {% for product in cart.products.all %}
+                {% include 'orden/snippets/product.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    {% include 'orden/snippets/detalles.html' %}
+    <div class="card card border-warning mb-3" style="width: 18rem;">
+        <div class="card-body">
+            <button
+                id="pay-button"
+                type="button"
+                class="btn btn-warning d-grid gap-2 w-100">
+                Pagar con Stripe
+            </button>
+            <div id="payment-status" class="small mt-2"></div>
+        </div>
+    </div>
+    <div class="">
+        <div class="card card border-warning mb-3" style="width: 18rem;">
+            <div class="card-body">
+                <form action="{% url 'cancelar' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger d-grid gap-2 w-100">Eliminar orden</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe("{{ stripe_public_key }}");
+    const elements = stripe.elements();
+    const card = elements.create("card");
+    const payButton = document.getElementById("pay-button");
+    const paymentStatus = document.getElementById("payment-status");
+    const cardErrors = document.getElementById("card-errors");
+
+    card.mount("#card-element");
+
+    card.on("change", function(event) {
+        if (event.error) {
+            cardErrors.textContent = event.error.message;
+        } else {
+            cardErrors.textContent = "";
+        }
+    });
+
+    payButton.addEventListener("click", async function() {
+        payButton.disabled = true;
+        paymentStatus.className = "small mt-2 text-muted";
+        paymentStatus.textContent = "Procesando pago...";
+
+        try {
+            const intentResponse = await fetch("{% url 'crear_payment_intent' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+            });
+            const intentData = await intentResponse.json();
+
+            if (!intentResponse.ok) {
+                throw new Error(intentData.error || "No se pudo iniciar el pago");
+            }
+
+            const result = await stripe.confirmCardPayment(intentData.client_secret, {
+                payment_method: {
+                    card: card,
+                },
+            });
+
+            if (result.error) {
+                throw new Error(result.error.message);
+            }
+
+            const confirmResponse = await fetch("{% url 'confirmar_pago' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+                body: JSON.stringify({
+                    payment_intent_id: result.paymentIntent.id,
+                }),
+            });
+            const confirmData = await confirmResponse.json();
+
+            if (!confirmResponse.ok) {
+                throw new Error(confirmData.error || "Stripe no confirmó el pago");
+            }
+
+            window.location.href = confirmData.redirect_url;
+        } catch (error) {
+            paymentStatus.className = "small mt-2 text-danger";
+            paymentStatus.textContent = error.message;
+            payButton.disabled = false;
+        }
+    });
+
+    const form = document.getElementById('formPromo-codigo')
+
+    form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const input = this.codigo
+        const url = this.action
+        const cont_total = document.getElementById('orden-total')
+        const cont_success = document.getElementById('codigosuccess')
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            body: new FormData(this),
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (response.status === true){
+                    cont_total.innerHTML = "$" + response.total
+                    cont_success.classList.remove('text-danger')
+                    cont_success.classList.add('text-success')
+                    cont_success.innerHTML = 'Codigo Aplicado'
+                    //bloquea el campo si el codigo se aplica correctamente
+                    input.setAttribute('readonly', true)
+                }else{
+                    cont_success.innerHTML = 'Codigo no valido'
+                    cont_success.classList.remove('text-success')
+                    cont_success.classList.add('text-danger')
+                }
+            })
+    })
+</script>
+
+{% endblock %}

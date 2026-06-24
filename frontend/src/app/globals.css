@@ -1,0 +1,313 @@
+@import "tailwindcss";
+
+/* ─── Nike Design System Tokens ─────────────────────────────────────────── */
+@theme {
+  /* Colors — Nike palette exact */
+  --color-ink:             #111111;
+  --color-canvas:          #ffffff;
+  --color-soft-cloud:      #f5f5f5;
+  --color-charcoal:        #39393b;
+  --color-ash:             #4b4b4d;
+  --color-mute:            #707072;
+  --color-stone:           #9e9ea0;
+  --color-hairline:        #cacacb;
+  --color-hairline-soft:   #e5e5e5;
+  --color-sale:            #d30005;
+  --color-sale-deep:       #780700;
+  --color-success:         #007d48;
+  --color-success-bright:  #1eaa52;
+  --color-info:            #1151ff;
+
+  /* Brand accent (warm gold — LATAM touch over monochrome base) */
+  --color-brand:           #ffb81c;
+  --color-brand-dark:      #d99500;
+
+  /* Spacing — 8px base grid */
+  --spacing-xxs:     2px;
+  --spacing-xs:      4px;
+  --spacing-sm:      8px;
+  --spacing-md:      12px;
+  --spacing-lg:      18px;
+  --spacing-xl:      24px;
+  --spacing-xxl:     30px;
+  --spacing-section: 48px;
+
+  /* Border radius */
+  --radius-none: 0px;
+  --radius-sm:   18px;
+  --radius-md:   24px;
+  --radius-lg:   30px;
+  --radius-full: 9999px;
+
+  /* Font families (open-source Nike substitutes) */
+  --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
+  --font-sans:    'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+}
+
+/* ─── Global Base ─────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* ─── Typography utilities (Nike scale) ──────────────────────────────────── */
+.display-campaign {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 400;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+
+.heading-xl {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.heading-lg {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.heading-md {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+/* ─── Button system ───────────────────────────────────────────────────────── */
+.btn-primary {
+  background-color: var(--color-ink);
+  color: var(--color-canvas);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: var(--radius-lg);
+  padding: 16px 32px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary:active {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: var(--color-soft-cloud);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: var(--radius-lg);
+  padding: 16px 32px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-outline-image {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: var(--radius-lg);
+  padding: 12px 24px;
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* ─── Product card ────────────────────────────────────────────────────────── */
+.product-card {
+  background-color: var(--color-canvas);
+  border-radius: var(--radius-none);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card-image {
+  background-color: var(--color-soft-cloud);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  width: 100%;
+}
+
+.product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-card-image img {
+  transform: scale(1.03);
+}
+
+.product-card-meta {
+  padding: var(--spacing-sm) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+/* ─── Filter chips ────────────────────────────────────────────────────────── */
+.filter-chip {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.filter-chip.active,
+.filter-chip:hover {
+  background-color: var(--color-ink);
+  color: var(--color-canvas);
+  border-color: var(--color-ink);
+}
+
+/* ─── Search pill ─────────────────────────────────────────────────────────── */
+.search-pill {
+  display: block;
+  background-color: var(--color-soft-cloud);
+  color: var(--color-ink);
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.search-pill:focus {
+  background-color: var(--color-canvas);
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* ─── Form input ──────────────────────────────────────────────────────────── */
+.form-input {
+  display: block;
+  width: 100%;
+  background-color: var(--color-soft-cloud);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  height: 46px;
+  border: 1.5px solid transparent;
+  outline: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.form-input:focus {
+  background-color: var(--color-canvas);
+  border-color: var(--color-ink);
+}
+
+.form-input::placeholder {
+  color: var(--color-stone);
+}
+
+/* ─── Sale badge ──────────────────────────────────────────────────────────── */
+.badge-sale {
+  color: var(--color-sale);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.badge-promo {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ─── Navigation ──────────────────────────────────────────────────────────── */
+.utility-bar {
+  background-color: var(--color-soft-cloud);
+  height: 36px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.primary-nav {
+  background-color: var(--color-canvas);
+  height: 64px;
+  border-bottom: 1px solid var(--color-hairline-soft);
+}
+
+/* ─── Dividers ────────────────────────────────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--color-hairline);
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-soft-cloud); }
+::-webkit-scrollbar-thumb { background: var(--color-hairline); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-stone); }
+
+/* ─── Selection ───────────────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--color-ink);
+  color: var(--color-canvas);
+}

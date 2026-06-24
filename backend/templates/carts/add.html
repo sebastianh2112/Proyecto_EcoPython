@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load funcion_tag %}
+{% block content %}
+<div class="row align-items-center">
+  <div class="col-3">
+    {% if product.image %}
+      <img src="{{ product.image.url }}" alt="ProductoImagen" width="200" height="200">
+    {% endif %}
+  </div>
+
+  <div class="col">
+    <div class="alert alert-success">
+      Producto agregado al carrito :D
+    </div>
+    <div>
+      <a href="{% url 'product' product.slug %}" class="fw-bold text-decoration-none">
+        {{ product.title }}
+      </a>
+    </div>
+    <div class="h3 font-monospace text-danger">
+      {{product.price | precio_tag}}
+    </div>
+  </div>
+</div>
+{% endblock %}
