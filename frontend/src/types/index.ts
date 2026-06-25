@@ -12,6 +12,7 @@ export interface Category {
   id: number
   title: string
   description: string
+  product_count?: number
 }
 
 export interface Product {

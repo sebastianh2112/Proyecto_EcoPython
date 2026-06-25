@@ -91,7 +91,8 @@ class MeView(generics.RetrieveAPIView):
 class CategoryListView(generics.ListAPIView):
     serializer_class = CategorySerializer
     permission_classes = [AllowAny]
-    queryset = Category.objects.all()
+    pagination_class = None
+    queryset = Category.objects.order_by('title')
 
 
 # ─── Products ─────────────────────────────────────────────────────────────────
@@ -107,7 +108,7 @@ class ProductListView(generics.ListAPIView):
         if q:
             qs = qs.filter(title__icontains=q)
         if category:
-            qs = qs.filter(categories__title__icontains=category)
+            qs = qs.filter(category__title__icontains=category)
         return qs
 
 

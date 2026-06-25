@@ -3,15 +3,17 @@ from django.views.generic.list import ListView
 from .models import Product
 from django.views.generic.detail import DetailView
 from django.db.models import Q
+from categories.models import Category
 
 class ProductListView(ListView):
     template_name = 'index.html'
     queryset = Product.objects.all()
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context ['mensaje'] = 'Productos'
-        
+        context['mensaje'] = 'Todos los Productos'
+        context['novedades'] = Product.objects.order_by('-created_at')[:4]
+        context['categories'] = Category.objects.prefetch_related('products').all()
         return context
     
 class ProductDetailview(DetailView):

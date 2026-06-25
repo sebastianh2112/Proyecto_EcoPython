@@ -4,7 +4,7 @@ import { ProductCard } from '@/components/product/ProductCard'
 import type { Product, Category } from '@/types'
 
 interface Props {
-  searchParams: Promise<{ q?: string; category?: string; page?: string }>
+  searchParams: Promise<{ q?: string; category?: string; page?: string; nuevo?: string }>
 }
 
 async function getData(q?: string, category?: string, page?: string) {
@@ -33,11 +33,13 @@ export default async function ProductsPage({ searchParams }: Props) {
     params.page,
   )
   const currentPage = params.page ? parseInt(params.page) : 1
+  const isNovedades = params.nuevo === '1' && !params.q && !params.category
 
   const buildUrl = (p: number) => {
     const sp = new URLSearchParams()
     if (params.q) sp.set('q', params.q)
     if (params.category) sp.set('category', params.category)
+    if (params.nuevo) sp.set('nuevo', params.nuevo)
     sp.set('page', String(p))
     return `/productos?${sp.toString()}`
   }
@@ -54,6 +56,8 @@ export default async function ProductsPage({ searchParams }: Props) {
             ? `"${params.q}"`
             : params.category
             ? params.category
+            : isNovedades
+            ? 'Novedades'
             : 'Todos los productos'}
         </h1>
         {total > 0 && (

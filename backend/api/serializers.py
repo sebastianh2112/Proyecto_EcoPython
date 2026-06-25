@@ -67,9 +67,11 @@ class UserSerializer(serializers.ModelSerializer):
 # ─── Categories ───────────────────────────────────────────────────────────────
 
 class CategorySerializer(serializers.ModelSerializer):
+    product_count = serializers.IntegerField(source='products.count', read_only=True)
+
     class Meta:
         model = Category
-        fields = ('id', 'title', 'description')
+        fields = ('id', 'title', 'description', 'product_count')
 
 
 # ─── Products ─────────────────────────────────────────────────────────────────

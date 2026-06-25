@@ -8,7 +8,7 @@ import { cartApi } from '@/lib/api'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const NAV_LINKS = [
-  { label: 'Novedades', href: '/productos?q=new' },
+  { label: 'Novedades', href: '/productos?nuevo=1' },
   { label: 'Productos', href: '/productos' },
   { label: 'Categorías', href: '/categorias' },
 ]
