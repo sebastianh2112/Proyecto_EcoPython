@@ -282,3 +282,7 @@ if not DEBUG or IS_PRODUCTION:
     CORS_ALLOWED_ORIGINS = [
         h for h in os.getenv("CORS_ORIGINS", "").split(",") if h.strip()
     ]
+
+CSRF_TRUSTED_ORIGINS = [
+    h for h in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if h.strip()
+]
