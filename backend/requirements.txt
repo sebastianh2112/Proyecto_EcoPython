@@ -25,3 +25,7 @@ tzdata==2025.3
 urllib3==2.6.2
 gunicorn==23.0.0
 whitenoise==6.8.2
+dj-database-url==2.3.0
+psycopg2-binary==2.9.10
+cloudinary==1.42.1
+django-cloudinary-storage==0.3.0
