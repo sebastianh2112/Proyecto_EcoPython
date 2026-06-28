@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'portaecommercepython-production.up.railway.app', pathname: '/media/**' },
       { protocol: 'http', hostname: 'portaecommercepython-production.up.railway.app', pathname: '/media/**' },
     ],
-    unoptimized: process.env.NODE_ENV === 'development',
+    unoptimized: true,
   },
 };
 
