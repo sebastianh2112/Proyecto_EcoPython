@@ -6,6 +6,10 @@ def funcionCarrito(request):
     cart_id = request.session.get('cart_id')
     cart = Cart.objects.filter(cart_id=cart_id).first()
     
+    #Buscar por usuario si no hay sesión (cross-site: cookie SameSite=Lax no viaja)
+    if cart is None and user:
+        cart = Cart.objects.filter(user=user).order_by('-id').first()
+
     #Crea carrito si no existe
     if cart is None:
         cart = Cart.objects.create(user=user)

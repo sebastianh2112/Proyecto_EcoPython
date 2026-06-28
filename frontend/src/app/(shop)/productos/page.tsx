@@ -3,6 +3,8 @@ import { productsApi, categoriesApi } from '@/lib/api'
 import { ProductCard } from '@/components/product/ProductCard'
 import type { Product, Category } from '@/types'
 
+export const dynamic = 'force-dynamic'
+
 interface Props {
   searchParams: Promise<{ q?: string; category?: string; page?: string; nuevo?: string }>
 }

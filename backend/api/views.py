@@ -62,6 +62,7 @@ class LoginView(generics.GenericAPIView):
         if user.username == 'demo':
             Cart.objects.filter(user=user).delete()
             Orden.objects.filter(user=user).delete()
+            DireccionEnvio.objects.filter(user=user).delete()
 
         refresh = RefreshToken.for_user(user)
         return Response({

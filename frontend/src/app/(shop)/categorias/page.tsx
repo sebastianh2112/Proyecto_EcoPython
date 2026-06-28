@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { categoriesApi } from '@/lib/api'
 import type { Category } from '@/types'
 
+export const dynamic = 'force-dynamic'
+
 async function getCategories(): Promise<Category[]> {
   try {
     return await categoriesApi.list()
