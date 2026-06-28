@@ -58,6 +58,11 @@ class LoginView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
+
+        if user.username == 'demo':
+            Cart.objects.filter(user=user).delete()
+            Orden.objects.filter(user=user).delete()
+
         refresh = RefreshToken.for_user(user)
         return Response({
             'user': UserSerializer(user).data,
