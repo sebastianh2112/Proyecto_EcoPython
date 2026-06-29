@@ -69,9 +69,6 @@ export default function LoginPage() {
             <p style={{ fontSize: '14px', color: 'var(--color-ink)' }}>
               <span style={{ fontWeight: 500 }}>Contraseña:</span> demo1234
             </p>
-            <p style={{ fontSize: '12px', color: 'var(--color-mute)', marginTop: '6px' }}>
-              Cada inicio de sesión reinicia el carrito y los datos.
-            </p>
           </div>
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
