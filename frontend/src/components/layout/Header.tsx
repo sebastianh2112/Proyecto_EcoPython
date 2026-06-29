@@ -38,6 +38,23 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-[var(--color-canvas)]">
+      {/* Portfolio bar */}
+      <div className="bg-[var(--color-ink)] text-[var(--color-canvas)]">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 h-9 flex items-center justify-center">
+          <a
+            href="https://tecnovance.com/proyectos"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-medium tracking-wide flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity"
+          >
+            <span className="hidden sm:inline text-[var(--color-stone)]">Proyecto de portafolio</span>
+            <span className="hidden sm:inline text-[var(--color-charcoal)]">·</span>
+            <span>Volver a Tecnovance.com</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
       {/* Utility bar */}
       <div className="utility-bar hidden md:flex items-center justify-end px-6">
         <div className="flex items-center gap-4 text-xs font-medium">
@@ -169,6 +186,16 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <hr className="divider" />
+            <a
+              href="https://tecnovance.com/proyectos"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+              className="text-sm font-medium opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2"
+            >
+              ← Volver a Tecnovance.com
+            </a>
             <hr className="divider" />
             {user ? (
               <Link href="/cuenta" onClick={() => setMenuOpen(false)} className="text-sm font-medium">
