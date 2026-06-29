@@ -27,9 +27,11 @@ from .serializers import (
 )
 
 import stripe
+import logging
 from django.conf import settings
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
+logger = logging.getLogger('api')
 
 
 # ─── Auth ─────────────────────────────────────────────────────────────────────
@@ -228,11 +230,16 @@ class OrderDetailView(generics.RetrieveAPIView):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_or_get_order(request):
-    cart = funcionCarrito(request)
-    if not cart or not cart.products.exists():
-        return Response({'error': 'El carrito está vacío.'}, status=400)
-    orden = funcionOrden(cart, request)
-    return Response(OrdenSerializer(orden).data)
+    try:
+        cart = funcionCarrito(request)
+        if not cart or not cart.products.exists():
+            return Response({'error': 'El carrito está vacío.'}, status=400)
+        orden = funcionOrden(cart, request)
+        data = OrdenSerializer(orden).data
+        return Response(data)
+    except Exception as e:
+        logger.exception('Error en create_or_get_order: %s', e)
+        return Response({'error': 'Error interno al crear la orden.', 'detail': str(e)}, status=500)
 
 
 @api_view(['POST'])
