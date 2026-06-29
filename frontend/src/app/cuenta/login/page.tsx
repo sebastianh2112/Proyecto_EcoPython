@@ -52,6 +52,25 @@ export default function LoginPage() {
             </p>
           </div>
 
+          {/* Demo credentials */}
+          <div style={{
+            marginBottom: '24px',
+            padding: '12px 16px',
+            border: '1px solid var(--color-hairline-soft)',
+            borderLeft: '3px solid var(--color-ink)',
+            backgroundColor: 'var(--color-soft-cloud)',
+          }}>
+            <p style={{ fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-mute)', marginBottom: '6px' }}>
+              Cuenta demo
+            </p>
+            <p style={{ fontSize: '14px', color: 'var(--color-ink)' }}>
+              <span style={{ fontWeight: 500 }}>Usuario:</span> demo
+            </p>
+            <p style={{ fontSize: '14px', color: 'var(--color-ink)' }}>
+              <span style={{ fontWeight: 500 }}>Contraseña:</span> demo1234
+            </p>
+          </div>
+
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <label style={{ fontSize: '14px', fontWeight: 500 }} htmlFor="username">Usuario</label>
