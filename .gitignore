@@ -19,6 +19,9 @@ env/
 # VS Code
 .vscode/
 
+# Claude Code
+.claude/
+
 # Sistema operativo
 .DS_Store
 Thumbs.db

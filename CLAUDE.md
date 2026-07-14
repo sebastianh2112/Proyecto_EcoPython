@@ -200,6 +200,8 @@ Proyecto_EcoPython/
 12. **No ejecutar comandos destructivos** sin confirmación.
 13. **No modificar `.env`, credenciales, tokens ni claves.**
 14. **Nunca subir secretos al repositorio.**
+15. **Nunca añadir a Claude/Anthropic como colaborador, autor o co-autor.** No agregar trailers `Co-Authored-By: Claude` (ni variantes) en commits, no invitar cuentas o apps de Claude/Anthropic como colaboradores del repositorio en GitHub, y no incluir a Claude en `CONTRIBUTORS`, changelogs u otros archivos de autoría. Los commits deben quedar atribuidos únicamente al usuario.
+16. **No subir la carpeta `.claude/`** (agentes, comandos, skills, settings) al repositorio. Debe permanecer local e ignorada vía `.gitignore`.
 
 ---
 
